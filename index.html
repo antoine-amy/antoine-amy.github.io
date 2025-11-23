@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Antoine Amy | Software Engineer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bruno-Style Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --accent: #38bdf8;
-      --accent-strong: #0ea5e9;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --border: rgba(148, 163, 184, 0.2);
-      --shadow: 0 15px 45px rgba(8, 15, 39, 0.35);
-      --radius: 16px;
-      --transition: 200ms ease;
-      --max-width: 1100px;
+      --bg: #0b0b10;
+      --panel: #11111a;
+      --accent: #f2b441;
+      --muted: #9ca3af;
+      --stroke: rgba(255, 255, 255, 0.08);
+      --gradient: radial-gradient(circle at 20% 20%, rgba(242, 180, 65, 0.2), transparent 35%), radial-gradient(circle at 80% 0%, rgba(86, 156, 214, 0.2), transparent 30%), linear-gradient(135deg, rgba(17, 17, 26, 0.85), rgba(11, 11, 16, 0.95));
     }
 
     * {
@@ -25,418 +23,458 @@
 
     body {
       margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08), transparent 25%),
-        radial-gradient(circle at 90% 10%, rgba(14, 165, 233, 0.08), transparent 25%),
-        radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.06), transparent 35%),
-        var(--bg);
+      font-family: "Space Grotesk", sans-serif;
+      color: #f6f7fb;
+      background: var(--gradient), var(--bg);
       min-height: 100vh;
-      line-height: 1.6;
-      scroll-behavior: smooth;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+      position: relative;
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(15, 23, 42, 0.75);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 16px;
+      margin-bottom: 48px;
     }
 
     .logo {
       font-weight: 700;
-      letter-spacing: 0.4px;
-      color: var(--text);
-      text-decoration: none;
+      letter-spacing: -0.02em;
+      font-size: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    nav ul {
-      list-style: none;
+    .logo::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 30px rgba(242, 180, 65, 0.6);
+    }
+
+    nav {
       display: flex;
-      gap: 14px;
-      padding: 0;
-      margin: 0;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     nav a {
-      color: var(--muted);
+      color: #f6f7fb;
       text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 999px;
-      transition: color var(--transition), background var(--transition);
-      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
     }
 
-    nav a:hover,
-    nav a:focus-visible {
-      color: var(--text);
-      background: rgba(56, 189, 248, 0.12);
-      outline: none;
-    }
-
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
+    nav a:hover {
+      border-color: var(--stroke);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .hero {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: calc(var(--radius) + 6px);
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(14, 165, 233, 0.05)), var(--card);
-      box-shadow: var(--shadow);
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
     }
 
-    .hero-text h1 {
-      margin: 0 0 12px;
-      font-size: clamp(32px, 4vw, 44px);
-      letter-spacing: -0.5px;
+    .eyebrow span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(242, 180, 65, 0.14);
     }
 
-    .hero-text h2 {
-      margin: 0 0 16px;
-      font-size: clamp(20px, 2.6vw, 26px);
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 12px 0 18px;
+    }
+
+    .hero h1 strong {
       color: var(--accent);
       font-weight: 700;
-      letter-spacing: 0.2px;
     }
 
-    .hero-text p {
-      margin: 0 0 22px;
-      color: var(--muted);
-      max-width: 620px;
+    .hero p {
+      color: #d1d5db;
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 0 16px;
     }
 
     .cta {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 12px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 12px;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
       border: 1px solid transparent;
+      color: #0b0b10;
+      background: var(--accent);
+      font-weight: 600;
+      letter-spacing: -0.01em;
       text-decoration: none;
-      font-weight: 700;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 20px 50px rgba(242, 180, 65, 0.2);
     }
 
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #0b1220;
-      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
-    }
-
-    .button.secondary {
-      color: var(--text);
-      border-color: var(--border);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .button:hover,
-    .button:focus-visible {
+    .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(56, 189, 248, 0.35);
-      outline: none;
+      box-shadow: 0 25px 60px rgba(242, 180, 65, 0.28);
     }
 
-    .section {
+    .ghost {
+      background: rgba(255, 255, 255, 0.03);
+      color: #f6f7fb;
+      border-color: var(--stroke);
+      box-shadow: none;
+    }
+
+    .ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .stats {
       display: grid;
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 12px 0 40px;
     }
 
-    .section h3 {
-      margin: 0;
-      font-size: clamp(22px, 2.4vw, 26px);
-      letter-spacing: -0.2px;
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .section p.section-lead {
-      margin: 0 0 10px;
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 15% 20%, rgba(242, 180, 65, 0.06), transparent 40%);
+      pointer-events: none;
+    }
+
+    .card small {
       color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .card strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
     }
 
     .grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 
-    .card {
-      padding: 18px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(17, 24, 39, 0.75);
-      box-shadow: 0 10px 28px rgba(7, 12, 26, 0.28);
-      transition: border-color var(--transition), transform var(--transition);
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card:hover,
-    .card:focus-within {
-      border-color: rgba(56, 189, 248, 0.6);
-      transform: translateY(-2px);
-    }
-
-    .card h4 {
-      margin: 0 0 6px;
-      font-size: 18px;
-    }
-
-    .card .meta {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .pill-row {
-      display: flex;
+    .panel .tag {
+      display: inline-flex;
+      align-items: center;
       gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--stroke);
+      padding: 8px 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .panel .tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 6px;
+      background: var(--accent);
+    }
+
+    .panel h3 {
+      margin: 6px 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: #d1d5db;
+      line-height: 1.55;
+    }
+
+    .panel a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .work {
+      margin: 50px 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.14);
-      color: var(--text);
-      font-size: 13px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-
-    .contact-card {
-      display: grid;
-      gap: 10px;
-      padding: 20px;
+      display: inline-flex;
       align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      color: #f6f7fb;
+      font-size: 14px;
     }
 
-    .contact-links {
+    .work-card {
+      background: linear-gradient(135deg, rgba(242, 180, 65, 0.12), rgba(17, 17, 26, 0.7));
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 60%);
+      top: -80px;
+      right: -40px;
+      transform: rotate(-10deg);
+    }
+
+    .work-card h3 {
+      margin: 6px 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .work-card p {
+      margin: 0 0 16px;
+      color: #e5e7eb;
+      line-height: 1.6;
+      max-width: 460px;
+    }
+
+    .meta {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 8px;
+      color: #cbd5e1;
+      font-size: 14px;
     }
 
-    .contact-link {
-      color: var(--text);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.28);
-      transition: background var(--transition), transform var(--transition);
-    }
-
-    .contact-link:hover,
-    .contact-link:focus-visible {
-      background: rgba(56, 189, 248, 0.2);
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    footer {
-      padding: 28px 20px 60px;
-      text-align: center;
+    .footer {
+      margin-top: 60px;
+      padding: 18px 0 0;
+      border-top: 1px solid var(--stroke);
       color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
       font-size: 14px;
     }
 
     @media (max-width: 640px) {
-      nav {
+      header {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      .section-title h2 {
+        font-size: 18px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a class="logo" href="#hero">Antoine Amy</a>
-      <ul>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="page">
+    <header>
+      <div class="logo">Bruno Studio</div>
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <main>
-    <section id="hero" class="hero">
-      <div class="hero-text">
-        <h1>Antoine Amy</h1>
-        <h2>Software Engineer &amp; Problem Solver</h2>
-        <p>
-          I design and build reliable, human-centered software with an eye for clean architecture, thoughtful collaboration,
-          and delightful user experiences. From backend services to polished frontends, I thrive on translating ideas into
-          maintainable products.
-        </p>
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span></span>Design Agency</div>
+        <h1>Brutally clear, strategically bold. Bruno crafts brands that <strong>move fast</strong>.</h1>
+        <p>A boutique design practice building expressive identities, future-ready digital products, and campaign systems that actually convert.</p>
         <div class="cta">
-          <a class="button primary" href="#contact">Let&apos;s talk</a>
-          <a class="button secondary" href="cv.pdf" download>Download CV</a>
+          <a class="button" href="#contact">Book an intro call</a>
+          <a class="button ghost" href="#work">View recent work</a>
         </div>
       </div>
-      <div class="card contact-card">
-        <div>
-          <div class="meta">Currently based in</div>
-          <h4>Paris, France</h4>
+      <div class="stats">
+        <div class="card">
+          <small>Selected Collaborations</small>
+          <strong>Saia / Futura / Novalab / River / Glint</strong>
         </div>
-        <div>
-          <div class="meta">Focus areas</div>
-          <div class="pill-row">
-            <span class="pill">Full-stack Engineering</span>
-            <span class="pill">UX-minded Development</span>
-            <span class="pill">Data-driven Decisions</span>
-          </div>
+        <div class="card">
+          <small>What we do</small>
+          <strong>Brand systems · Product UX · Campaign design</strong>
+        </div>
+        <div class="card">
+          <small>Timeline</small>
+          <strong>2–6 week sprints with embedded team</strong>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="section">
-      <div>
-        <h3>Experience</h3>
-        <p class="section-lead">Hands-on engineering leadership and pragmatic delivery across fast-paced teams.</p>
+    <section id="work" class="work">
+      <div class="section-title">
+        <h2>Recent Work</h2>
+        <div class="pill">Open for Q3 projects</div>
       </div>
       <div class="grid">
-        <article class="card">
-          <h4>Senior Software Engineer — TechCorp</h4>
-          <div class="meta">2021 — Present · Paris</div>
-          <p>Leading feature squads shipping scalable APIs and dashboards, mentoring developers, and partnering with design to streamline user flows.</p>
-          <div class="pill-row">
-            <span class="pill">TypeScript</span>
-            <span class="pill">React</span>
-            <span class="pill">Node.js</span>
-            <span class="pill">PostgreSQL</span>
+        <div class="work-card">
+          <div class="tag">Product launch</div>
+          <h3>River OS — From beta to breakout</h3>
+          <p>Full-funnel visual language, website rebuild, and launch toolkit that lifted activation by 31% in the first month.</p>
+          <div class="meta">
+            <span>Brand + Web</span>
+            <span>Go-to-market</span>
+            <span>Design systems</span>
           </div>
-        </article>
-        <article class="card">
-          <h4>Software Engineer — Productive Labs</h4>
-          <div class="meta">2018 — 2021 · Remote</div>
-          <p>Built resilient services, observability pipelines, and onboarding experiences that reduced ramp-up time and improved customer activation.</p>
-          <div class="pill-row">
-            <span class="pill">Python</span>
-            <span class="pill">Django</span>
-            <span class="pill">Kubernetes</span>
-            <span class="pill">Grafana</span>
-          </div>
-        </article>
-        <article class="card">
-          <h4>Engineering Intern — InnovateX</h4>
-          <div class="meta">2017 — 2018 · Lyon</div>
-          <p>Prototyped interfaces and automation scripts that cut manual effort and sparked the team&apos;s first design system initiative.</p>
-          <div class="pill-row">
-            <span class="pill">Vue.js</span>
-            <span class="pill">Automation</span>
-            <span class="pill">UI Systems</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div>
-        <h3>Projects</h3>
-        <p class="section-lead">Selected work that showcases product thinking and technical depth.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <h4>Insight Dashboard</h4>
-          <div class="meta">Data-rich analytics platform</div>
-          <p>Delivered a responsive data visualization suite that unified product metrics, letting stakeholders self-serve insights and reduce reporting time.</p>
-          <div class="pill-row">
-            <span class="pill">React</span>
-            <span class="pill">D3</span>
-            <span class="pill">Design Systems</span>
-          </div>
-        </article>
-        <article class="card">
-          <h4>Workflow Orchestrator</h4>
-          <div class="meta">Event-driven automation</div>
-          <p>Architected a queue-backed orchestration layer that coordinated microservices and improved reliability for customer-critical processes.</p>
-          <div class="pill-row">
-            <span class="pill">Go</span>
-            <span class="pill">gRPC</span>
-            <span class="pill">CI/CD</span>
-          </div>
-        </article>
-        <article class="card">
-          <h4>Accessible Design Kit</h4>
-          <div class="meta">Reusable component library</div>
-          <p>Created an accessible, themeable component kit that accelerated UI delivery and standardized user experience across teams.</p>
-          <div class="pill-row">
-            <span class="pill">Accessibility</span>
-            <span class="pill">Storybook</span>
-            <span class="pill">Token System</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="skills" class="section">
-      <div>
-        <h3>Skills</h3>
-        <p class="section-lead">A balanced toolbox for building, scaling, and refining digital products.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <h4>Languages &amp; Frameworks</h4>
-          <p>JavaScript/TypeScript, Python, Go, HTML5, CSS3, React, Vue, Node.js, Django.</p>
-        </article>
-        <article class="card">
-          <h4>Architecture &amp; Delivery</h4>
-          <p>API design, testing strategy, CI/CD, cloud-native deployments, observability, performance profiling.</p>
-        </article>
-        <article class="card">
-          <h4>Collaboration</h4>
-          <p>Design partnership, product discovery, documentation, mentoring, stakeholder communication, inclusive facilitation.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div>
-        <h3>Contact</h3>
-        <p class="section-lead">Ready to collaborate? Reach out and let&apos;s build something thoughtful together.</p>
-      </div>
-      <article class="card contact-card">
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:hello@antoineamy.dev">hello@antoineamy.dev</a>
-          <a class="contact-link" href="https://www.linkedin.com/in/antoine-amy" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="contact-link" href="cv.pdf" download>Download CV</a>
         </div>
-        <p style="margin:0; color: var(--muted);">Prefer async? Send an email with a few lines about your project and I&apos;ll reply within a business day.</p>
-      </article>
+        <div class="work-card">
+          <div class="tag">Identity</div>
+          <h3>Saia — A new face for climate capital</h3>
+          <p>We crafted an identity with tough typography, modular iconography, and a story that keeps investors leaning in.</p>
+          <div class="meta">
+            <span>Identity</span>
+            <span>Pitch decks</span>
+            <span>Campaign assets</span>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="tag">Platform UX</div>
+          <h3>Glint — Dashboard that makes sense</h3>
+          <p>Reimagined data hierarchy, calmer visuals, and interactive states that make daily workflows feel intentional.</p>
+          <div class="meta">
+            <span>UX/UI</span>
+            <span>Prototyping</span>
+            <span>Design ops</span>
+          </div>
+        </div>
+      </div>
     </section>
-  </main>
 
-  <footer>
-    Crafted with care — Antoine Amy
-  </footer>
+    <section id="services" class="grid">
+      <div class="panel">
+        <div class="tag">Brand</div>
+        <h3>Identity & Voice</h3>
+        <p>Logotypes, typographic worlds, tone of voice, and motion rules that give your brand a sharp, durable edge.</p>
+      </div>
+      <div class="panel">
+        <div class="tag">Product</div>
+        <h3>Digital Experiences</h3>
+        <p>UX audits, prototypes, UI systems, and launch sites built to ship quickly while staying flexible for the next release.</p>
+      </div>
+      <div class="panel">
+        <div class="tag">Growth</div>
+        <h3>Campaign & Content</h3>
+        <p>Performance-ready creative packs, social kits, landing pages, and founder decks that align your team and audience.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="panel" style="margin-top: 40px;">
+      <div class="tag">Let’s build</div>
+      <h3>Tell us about your next launch</h3>
+      <p>Share a note with scope, timing, and what success looks like. We reply within 24 hours.</p>
+      <div class="cta" style="margin-top: 14px;">
+        <a class="button" href="mailto:studio@bruno.agency">Email the studio</a>
+        <a class="button ghost" href="#work">Browse work</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>Bruno Design Agency — Independent & decisive</div>
+      <div>Based in Paris · Working worldwide</div>
+    </div>
+  </div>
 </body>
 </html>
