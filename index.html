@@ -299,6 +299,7 @@
       line-height: 1.02;
       letter-spacing: -0.03em;
       margin: 12px 0 18px;
+      max-width: 26ch;
     }
 
     .hero h1 strong {
@@ -792,11 +793,22 @@
       .hero {
         grid-template-columns: 1fr;
         min-height: auto;
-        gap: 16px;
+        gap: 12px;
       }
 
       .hero-visual {
-        justify-items: center;
+        justify-items: flex-start;
+        max-width: clamp(200px, 70vw, 320px);
+        align-self: flex-start;
+        justify-self: flex-start;
+      }
+
+      .portrait {
+        max-width: clamp(160px, 46vw, 210px);
+      }
+
+      .hero h1 {
+        font-size: clamp(26px, 8vw, 32px);
         max-width: 100%;
       }
 
