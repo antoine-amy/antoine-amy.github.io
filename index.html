@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bruno-Style Design Studio</title>
+  <title>Antoine Amy — Subatomic Physics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0b10;
-      --panel: #11111a;
-      --accent: #f2b441;
-      --muted: #9ca3af;
-      --stroke: rgba(255, 255, 255, 0.08);
-      --gradient: radial-gradient(circle at 20% 20%, rgba(242, 180, 65, 0.2), transparent 35%), radial-gradient(circle at 80% 0%, rgba(86, 156, 214, 0.2), transparent 30%), linear-gradient(135deg, rgba(17, 17, 26, 0.85), rgba(11, 11, 16, 0.95));
+      --bg: #f7fbff;
+      --panel: #ffffff;
+      --accent: #0ba7c9;
+      --accent-2: #5f7cff;
+      --muted: #5c6f85;
+      --text: #0e1a2b;
+      --stroke: rgba(14, 26, 43, 0.08);
+      --gradient: linear-gradient(135deg, #f7fbff 0%, #eef3fa 100%);
+      --shadow-strong: 0 28px 80px rgba(15, 60, 120, 0.14);
+      --shadow-soft: 0 18px 40px rgba(14, 26, 43, 0.08);
+      --glass: rgba(255, 255, 255, 0.9);
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     * {
@@ -24,25 +33,68 @@
     body {
       margin: 0;
       font-family: "Space Grotesk", sans-serif;
-      color: #f6f7fb;
+      color: var(--text);
       background: var(--gradient), var(--bg);
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Sora", "Space Grotesk", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    ::selection {
+      background: rgba(93, 240, 255, 0.22);
+      color: #061123;
     }
 
     .page {
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 22px 80px;
+      max-width: none;
+      margin: 0;
+      padding: clamp(12px, 2.5vw, 24px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 72px);
       position: relative;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      z-index: -1;
+    }
+
+    .page::before {
+      background: rgba(11, 167, 201, 0.08);
+      top: 80px;
+      left: -120px;
+    }
+
+    .page::after {
+      background: rgba(95, 124, 255, 0.08);
+      bottom: 0;
+      right: -120px;
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 24px;
       margin-bottom: 48px;
+      flex-wrap: wrap;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -52,46 +104,120 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: var(--text);
     }
 
-    .logo::before {
-      content: "";
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 30px rgba(242, 180, 65, 0.6);
+    .logo svg {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 6px 16px rgba(11, 167, 201, 0.2));
+    }
+
+    .logo .wordmark {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.1;
     }
 
     nav {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 18px;
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      flex: 1 1 100%;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #f6f7fb;
+      color: var(--text);
       text-decoration: none;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid transparent;
       transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
     }
 
     nav a:hover {
       border-color: var(--stroke);
-      background: rgba(255, 255, 255, 0.03);
+      background: linear-gradient(135deg, rgba(11, 167, 201, 0.12), rgba(95, 124, 255, 0.12));
+      box-shadow: 0 12px 24px rgba(14, 26, 43, 0.12);
     }
 
     .hero {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 26px;
-      align-items: end;
-      margin-bottom: 42px;
+      grid-template-columns: minmax(340px, 1.6fr) minmax(200px, 0.9fr);
+      gap: clamp(16px, 3vw, 36px);
+      align-items: center;
+      margin-bottom: clamp(26px, 4vw, 44px);
+      animation: rise 0.8s ease 0.05s both;
+      text-align: left;
+      justify-items: start;
+      padding: clamp(6px, 1.5vw, 16px) 0 0;
+      border-radius: 0;
+      border: none;
+      background: none;
+      box-shadow: none;
+      position: relative;
+      overflow: visible;
+      min-height: auto;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: clamp(260px, 32vw, 420px);
+      height: clamp(260px, 32vw, 420px);
+      background: radial-gradient(circle, rgba(11, 167, 201, 0.12), transparent 60%);
+      top: -160px;
+      right: -140px;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero > div:first-child {
+      max-width: none;
+      width: 100%;
+      align-self: center;
+    }
+
+    .hero-visual {
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+      width: 100%;
+      max-width: clamp(280px, 32vw, 460px);
+      align-self: center;
+      justify-self: center;
+    }
+
+    .portrait {
+      width: 100%;
+      max-width: clamp(180px, 20vw, 240px);
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-strong);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(11, 167, 201, 0.06), #ffffff);
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.08);
+      transform: scale(1.02);
     }
 
     .eyebrow {
@@ -105,6 +231,7 @@
       padding: 8px 12px;
       border-radius: 12px;
       border: 1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(11, 167, 201, 0.08), rgba(95, 124, 255, 0.08));
     }
 
     .eyebrow span {
@@ -112,11 +239,11 @@
       height: 6px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(242, 180, 65, 0.14);
+      box-shadow: 0 0 0 6px rgba(11, 167, 201, 0.12);
     }
 
     .hero h1 {
-      font-size: clamp(36px, 7vw, 72px);
+      font-size: clamp(34px, 6.5vw, 64px);
       line-height: 1.02;
       letter-spacing: -0.03em;
       margin: 12px 0 18px;
@@ -127,11 +254,16 @@
       font-weight: 700;
     }
 
+    .accent {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
     .hero p {
-      color: #d1d5db;
+      color: var(--muted);
       font-size: 18px;
       line-height: 1.6;
-      max-width: 520px;
+      max-width: min(840px, 96vw);
       margin: 0 0 16px;
     }
 
@@ -139,6 +271,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      justify-content: flex-start;
     }
 
     .button {
@@ -148,52 +281,87 @@
       padding: 14px 18px;
       border-radius: 14px;
       border: 1px solid transparent;
-      color: #0b0b10;
-      background: var(--accent);
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      background-size: 200% 200%;
       font-weight: 600;
       letter-spacing: -0.01em;
       text-decoration: none;
       transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
-      box-shadow: 0 20px 50px rgba(242, 180, 65, 0.2);
+      box-shadow: 0 18px 40px rgba(11, 167, 201, 0.22);
+      position: relative;
+      overflow: hidden;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 25px 60px rgba(242, 180, 65, 0.28);
+      box-shadow: 0 22px 60px rgba(11, 167, 201, 0.3);
+      background-position: 100% 0%;
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.18), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .button:hover::after {
+      opacity: 1;
     }
 
     .ghost {
-      background: rgba(255, 255, 255, 0.03);
-      color: #f6f7fb;
+      background: #ffffff;
+      color: var(--text);
       border-color: var(--stroke);
       box-shadow: none;
     }
 
     .ghost:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: #f3f7fb;
     }
 
     .stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 12px 0 40px;
+      gap: clamp(12px, 2vw, 20px);
+      margin: 10px 0 32px;
+      justify-items: start;
+      width: 100%;
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(180deg, #ffffff, #f4f7fc);
       border: 1px solid var(--stroke);
       border-radius: 18px;
       padding: 16px 18px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      width: 100%;
+      max-width: none;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: clamp(12px, 2vw, 18px);
+      margin: 6px 0 28px;
+    }
+
+    .info-grid .card {
+      max-width: none;
     }
 
     .card::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 15% 20%, rgba(242, 180, 65, 0.06), transparent 40%);
+      background: radial-gradient(circle at 15% 20%, rgba(11, 167, 201, 0.08), transparent 40%);
       pointer-events: none;
     }
 
@@ -211,10 +379,16 @@
       letter-spacing: -0.02em;
     }
 
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(14, 26, 43, 0.12);
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
+      justify-items: stretch;
     }
 
     .panel {
@@ -224,6 +398,11 @@
       padding: 22px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: rise 0.8s ease 0.15s both;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(6px);
     }
 
     .panel .tag {
@@ -238,6 +417,7 @@
       padding: 8px 12px;
       border-radius: 12px;
       margin-bottom: 12px;
+      background: linear-gradient(135deg, rgba(93, 240, 255, 0.18), rgba(123, 125, 255, 0.12));
     }
 
     .panel .tag::before {
@@ -256,7 +436,7 @@
 
     .panel p {
       margin: 0;
-      color: #d1d5db;
+      color: var(--muted);
       line-height: 1.55;
     }
 
@@ -272,10 +452,12 @@
 
     .section-title {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       margin-bottom: 14px;
       gap: 12px;
+      text-align: center;
+      flex-wrap: wrap;
     }
 
     .section-title h2 {
@@ -284,6 +466,17 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
+      position: relative;
+    }
+
+    .section-title h2::after {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      margin: 8px auto 0;
     }
 
     .pill {
@@ -293,17 +486,31 @@
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid var(--stroke);
-      color: #f6f7fb;
+      color: var(--text);
       font-size: 14px;
+      background: linear-gradient(135deg, rgba(11, 167, 201, 0.08), #ffffff);
     }
 
     .work-card {
-      background: linear-gradient(135deg, rgba(242, 180, 65, 0.12), rgba(17, 17, 26, 0.7));
+      background: linear-gradient(180deg, #ffffff, #f5f8fd);
       border: 1px solid var(--stroke);
       border-radius: 20px;
       padding: 20px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: rise 0.8s ease 0.1s both;
+      text-align: left;
+    }
+
+    .work-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      margin: 4px 0 12px;
+      box-shadow: var(--shadow-soft);
     }
 
     .work-card::before {
@@ -311,9 +518,9 @@
       position: absolute;
       width: 220px;
       height: 220px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 60%);
-      top: -80px;
-      right: -40px;
+      background: radial-gradient(circle, rgba(95, 124, 255, 0.12), transparent 60%);
+      top: -90px;
+      right: -20px;
       transform: rotate(-10deg);
     }
 
@@ -325,17 +532,31 @@
 
     .work-card p {
       margin: 0 0 16px;
-      color: #e5e7eb;
+      color: var(--text);
       line-height: 1.6;
       max-width: 460px;
     }
+
+    .work-card:hover,
+    .panel:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-strong);
+    }
+
 
     .meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      color: #cbd5e1;
+      color: var(--muted);
       font-size: 14px;
+    }
+
+    .meta span {
+      background: rgba(11, 167, 201, 0.1);
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      padding: 6px 10px;
     }
 
     .footer {
@@ -349,9 +570,116 @@
       flex-wrap: wrap;
       gap: 12px;
       font-size: 14px;
+      background: linear-gradient(180deg, #ffffff, #f2f6fb);
+      border-radius: 16px 16px 0 0;
+      padding: 18px 16px;
+    }
+
+    ul {
+      color: var(--text);
+      padding-left: 18px;
+      margin: 8px 0 0;
+      line-height: 1.6;
+    }
+
+    .wordmark small {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* scroll reveal */
+    [data-reveal] {
+      opacity: 0;
+      translate: 0 26px;
+      scale: 0.98;
+      transition: opacity 0.8s ease, translate 0.8s ease, scale 0.8s ease;
+    }
+
+    [data-reveal].in-view {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+
+    [data-reveal][data-delay="1"] { transition-delay: 0.08s; }
+    [data-reveal][data-delay="2"] { transition-delay: 0.16s; }
+    [data-reveal][data-delay="3"] { transition-delay: 0.24s; }
+    [data-reveal][data-delay="4"] { transition-delay: 0.32s; }
+
+    /* subtle motion and accent pulses */
+    .logo::before {
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    .stats .card:nth-child(1) { animation-delay: 0.1s; }
+    .stats .card:nth-child(2) { animation-delay: 0.18s; }
+    .stats .card:nth-child(3) { animation-delay: 0.26s; }
+    .grid .work-card:nth-child(1) { animation-delay: 0.12s; }
+    .grid .work-card:nth-child(2) { animation-delay: 0.2s; }
+    .grid .work-card:nth-child(3) { animation-delay: 0.28s; }
+    .grid .work-card:nth-child(4) { animation-delay: 0.36s; }
+    .grid .work-card:nth-child(5) { animation-delay: 0.44s; }
+    .grid .panel:nth-child(1) { animation-delay: 0.12s; }
+    .grid .panel:nth-child(2) { animation-delay: 0.2s; }
+    .grid .panel:nth-child(3) { animation-delay: 0.28s; }
+    .grid .panel:nth-child(4) { animation-delay: 0.36s; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(11, 167, 201, 0.35); }
+      50% { transform: scale(1.08); box-shadow: 0 0 40px rgba(95, 124, 255, 0.35); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0ms !important;
+      }
+      body {
+        background-size: auto;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        justify-items: start;
+        text-align: left;
+      }
+
+      .hero-visual {
+        justify-items: center;
+        max-width: clamp(240px, 60vw, 360px);
+      }
     }
 
     @media (max-width: 640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 16px;
+      }
+
+      .hero-visual {
+        justify-items: center;
+        max-width: 100%;
+      }
+
       header {
         flex-direction: column;
         align-items: flex-start;
@@ -369,112 +697,200 @@
 </head>
 <body>
   <div class="page">
-    <header>
-      <div class="logo">Bruno Studio</div>
-      <nav>
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
-
-    <section class="hero">
+    <section id="hero" class="hero" data-reveal>
       <div>
-        <div class="eyebrow"><span></span>Design Agency</div>
-        <h1>Brutally clear, strategically bold. Bruno crafts brands that <strong>move fast</strong>.</h1>
-        <p>A boutique design practice building expressive identities, future-ready digital products, and campaign systems that actually convert.</p>
+        <h1>Designing <span class="accent">ultra-clean</span> <strong>cryogenic&nbsp;instrumentation</strong> for rare-event searches.</h1>
+        <p>PhD student at SUBATECH (Nantes) and UMass Amherst. I design, simulate, and operate detectors that push sensitivity for neutrino and dark matter experiments.</p>
         <div class="cta">
-          <a class="button" href="#contact">Book an intro call</a>
-          <a class="button ghost" href="#work">View recent work</a>
+          <a class="button" href="mailto:antoine.amy72@gmail.com">Email me</a>
+          <a class="button ghost" href="CV_postdoc_antoine.pdf" download>Download CV</a>
         </div>
       </div>
-      <div class="stats">
-        <div class="card">
-          <small>Selected Collaborations</small>
-          <strong>Saia / Futura / Novalab / River / Glint</strong>
-        </div>
-        <div class="card">
-          <small>What we do</small>
-          <strong>Brand systems · Product UX · Campaign design</strong>
-        </div>
-        <div class="card">
-          <small>Timeline</small>
-          <strong>2–6 week sprints with embedded team</strong>
+      <div class="hero-visual">
+        <div class="portrait">
+          <img src="profile.jpeg" alt="Portrait of Antoine Amy" loading="lazy">
         </div>
       </div>
     </section>
 
-    <section id="work" class="work">
+    <div class="info-grid" data-reveal>
+      <div class="card">
+        <small>Affiliations</small>
+        <strong>SUBATECH · UMass Amherst</strong>
+      </div>
+      <div class="card">
+        <small>Experiments</small>
+        <strong>nEXO · Virgo · XENON/DARWIN · KM3NeT</strong>
+      </div>
+      <div class="card">
+        <small>Focus areas</small>
+        <strong>Impurity control · Background modeling · Cryo systems</strong>
+      </div>
+      <div class="card">
+        <small>Methods</small>
+        <strong>Geant4/ROOT · MC pipelines · Cryo instrumentation</strong>
+      </div>
+    </div>
+
+    <section id="research" class="work" data-reveal>
       <div class="section-title">
-        <h2>Recent Work</h2>
-        <div class="pill">Open for Q3 projects</div>
+        <h2>Research Highlights</h2>
+        <div class="pill">nEXO collaboration</div>
       </div>
       <div class="grid">
-        <div class="work-card">
-          <div class="tag">Product launch</div>
-          <h3>River OS — From beta to breakout</h3>
-          <p>Full-funnel visual language, website rebuild, and launch toolkit that lifted activation by 31% in the first month.</p>
+        <div class="work-card" data-reveal data-delay="1">
+          <div class="tag">Impurities & purification</div>
+          <img class="work-thumb" src="electronegative_impurties_models.png" alt="Modeling electronegative impurities" loading="lazy">
+          <h3>Modeling ultra-trace electronegative impurities</h3>
+          <p>Built purification and outgassing models for UHV systems and liquid xenon, established mitigation practices (throughput/RGA measurements, bake cycles, purges), and analyzed electron lifetimes.</p>
           <div class="meta">
-            <span>Brand + Web</span>
-            <span>Go-to-market</span>
-            <span>Design systems</span>
+            <span>nEXO</span>
+            <span>Liquid xenon</span>
+            <span>Data analysis</span>
           </div>
         </div>
-        <div class="work-card">
-          <div class="tag">Identity</div>
-          <h3>Saia — A new face for climate capital</h3>
-          <p>We crafted an identity with tough typography, modular iconography, and a story that keeps investors leaning in.</p>
+        <div class="work-card" data-reveal data-delay="2">
+          <div class="tag">Backgrounds</div>
+          <img class="work-thumb" src="nEXO_bkgd_vs_shielding.png" alt="Simulated background versus shielding" loading="lazy">
+          <h3>Shielding and radioactive background pipelines</h3>
+          <p>Ran large Monte Carlo campaigns for radioactive decays, automated TB-scale simulation/reconstruction, and modeled gamma attenuation to set collaboration-wide background budgets.</p>
           <div class="meta">
-            <span>Identity</span>
-            <span>Pitch decks</span>
-            <span>Campaign assets</span>
+            <span>Geant4</span>
+            <span>ROOT</span>
+            <span>Statistics</span>
           </div>
         </div>
-        <div class="work-card">
-          <div class="tag">Platform UX</div>
-          <h3>Glint — Dashboard that makes sense</h3>
-          <p>Reimagined data hierarchy, calmer visuals, and interactive states that make daily workflows feel intentional.</p>
+        <div class="work-card" data-reveal data-delay="3">
+          <div class="tag">Cryogenics</div>
+          <img class="work-thumb" src="HFE_setup.jpeg" alt="HFE cryogenic recirculation setup" loading="lazy">
+          <h3>Designing cryogenic recirculation systems</h3>
+          <p>Designed and tested HFE recirculation, LN2 heat exchangers, instrumentation/DAQ, Arduino-based slow controls, and custom PCBs for power, relays, and valve control.</p>
           <div class="meta">
-            <span>UX/UI</span>
-            <span>Prototyping</span>
-            <span>Design ops</span>
+            <span>Instrumentation</span>
+            <span>Embedded</span>
+            <span>Mentorship</span>
+          </div>
+        </div>
+        <div class="work-card" data-reveal data-delay="4">
+          <div class="tag">Optics</div>
+          <img class="work-thumb" src="croissant.jpeg" alt="Optical bench tools and notes" loading="lazy">
+          <h3>Advanced Virgo mode-cleaner R&amp;D</h3>
+          <p>Assembled optical benches, simulated mode-cleaner cavities in Python/MATLAB, and performed alignment and noise characterization.</p>
+          <div class="meta">
+            <span>Virgo</span>
+            <span>Optics</span>
+            <span>Simulation</span>
+          </div>
+        </div>
+        <div class="work-card" data-reveal data-delay="1">
+          <div class="tag">Photosensors</div>
+          <h3>XENON/DARWIN ABALONE characterization</h3>
+          <p>Characterized hybrid photosensors, built Geant4 optical models, and measured DAQ noise to evaluate detector performance.</p>
+          <div class="meta">
+            <span>XENON/DARWIN</span>
+            <span>Geant4</span>
+            <span>DAQ</span>
+          </div>
+        </div>
+        <div class="work-card" data-reveal data-delay="2">
+          <div class="tag">Analysis</div>
+          <img class="work-thumb" src="profile.jpeg" alt="Antoine working on analysis" loading="lazy">
+          <h3>Neutrino & dark matter sensitivity studies</h3>
+          <p>Contributed to nEXO sensitivity work on solar neutrinos and fermionic dark matter, aligning background-free analyses with detector design constraints.</p>
+          <div class="meta">
+            <span>Sensitivity</span>
+            <span>Stats</span>
+            <span>nEXO</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="services" class="grid">
-      <div class="panel">
-        <div class="tag">Brand</div>
-        <h3>Identity & Voice</h3>
-        <p>Logotypes, typographic worlds, tone of voice, and motion rules that give your brand a sharp, durable edge.</p>
+    <section id="skills" class="grid" data-reveal>
+      <div class="panel" data-reveal data-delay="1">
+        <div class="tag">Modeling</div>
+        <h3>Impurity & background control</h3>
+        <p>Purification/outgassing models, gamma attenuation, shielding design, and mitigation playbooks for low-background detectors.</p>
       </div>
-      <div class="panel">
-        <div class="tag">Product</div>
-        <h3>Digital Experiences</h3>
-        <p>UX audits, prototypes, UI systems, and launch sites built to ship quickly while staying flexible for the next release.</p>
+      <div class="panel" data-reveal data-delay="2">
+        <div class="tag">Simulation & data</div>
+        <h3>Monte Carlo + analysis</h3>
+        <p>Geant4/ROOT, MCNP, Python (NumPy, SciPy, pandas, Matplotlib, strax) with automated pipelines on SLURM/HPC clusters.</p>
       </div>
-      <div class="panel">
-        <div class="tag">Growth</div>
-        <h3>Campaign & Content</h3>
-        <p>Performance-ready creative packs, social kits, landing pages, and founder decks that align your team and audience.</p>
+      <div class="panel" data-reveal data-delay="3">
+        <div class="tag">Instrumentation</div>
+        <h3>Cryo systems & controls</h3>
+        <p>DAQ and slow controls, sensor integration (thermocouples, pressure, flow), Arduino-based readout, PCB design, and DIN-rail power/relays/valves.</p>
+      </div>
+      <div class="panel" data-reveal data-delay="4">
+        <div class="tag">Coding</div>
+        <h3>Software toolkit</h3>
+        <p>C++, Python, Bash; reproducible data pipelines; Linux/macOS/Windows; LATEX/Markdown documentation.</p>
+      </div>
+      <div class="panel" data-reveal data-delay="5">
+        <div class="tag">Electronics</div>
+        <h3>PCB & embedded builds</h3>
+        <p>Arduino-based readouts, PCB design, relay/valve control, sensor integration, and power systems for lab instrumentation.</p>
+      </div>
+      <div class="panel" data-reveal data-delay="6">
+        <div class="tag">Communication</div>
+        <h3>Teaching & outreach</h3>
+        <p>Lectures, labs, and public talks; fluent in French/English; clear documentation to align collaborators and students.</p>
       </div>
     </section>
 
-    <section id="contact" class="panel" style="margin-top: 40px;">
-      <div class="tag">Let’s build</div>
-      <h3>Tell us about your next launch</h3>
-      <p>Share a note with scope, timing, and what success looks like. We reply within 24 hours.</p>
+    <section id="publications" class="panel" style="margin-top: 40px;" data-reveal>
+      <div class="tag">Publications</div>
+      <h3>Selected papers</h3>
+      <ul>
+        <li>Supernova electron-neutrino interactions with xenon in the nEXO detector, Phys. Rev. D 110, 093002 (2024).</li>
+        <li>Imaging of single barium atoms in solid xenon for barium tagging in a Xe-136 double beta decay experiment, Phys. Rev. Research 6, 043193 (2024).</li>
+        <li>Sensitivity of nEXO to Xe-136 charged-current interactions: background-free searches for solar neutrinos and fermionic dark matter (2025, submitted).</li>
+        <li>Ultra-pure nickel for structural components of low-radioactivity instruments (2025, submitted).</li>
+      </ul>
+    </section>
+
+    <section id="teaching" class="panel" style="margin-top: 20px;" data-reveal>
+      <div class="tag">Teaching & outreach</div>
+      <h3>Sharing physics</h3>
+      <ul>
+        <li>IMT Atlantique: C++ and Geant4/ROOT lectures and labs (2024–2025).</li>
+        <li>IMT Atlantique CODEVSI: nuclear power plant modeling project supervision (2023–2024).</li>
+        <li>Nantes Université: internship report reviews and juries (2023–2024).</li>
+        <li>Talks: JED Angers, GDR DUPhy, JRJC, collaboration meetings, and outreach sessions.</li>
+        <li>Science Festival demonstrations; outreach talk on pathways to a PhD.</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="panel" style="margin-top: 20px;" data-reveal>
+      <div class="tag">Contact</div>
+      <h3>Let us collaborate on your next detector challenge</h3>
+      <p>Email works best. Include scope, timelines, and the physics question you want to answer.</p>
       <div class="cta" style="margin-top: 14px;">
-        <a class="button" href="mailto:studio@bruno.agency">Email the studio</a>
-        <a class="button ghost" href="#work">Browse work</a>
+        <a class="button" href="mailto:antoine.amy72@gmail.com">Send an email</a>
+        <a class="button ghost" href="https://www.linkedin.com/in/antoine-amy" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
     </section>
 
     <div class="footer">
-      <div>Bruno Design Agency — Independent & decisive</div>
-      <div>Based in Paris · Working worldwide</div>
+      <div>Antoine Amy — Subatomic Physics PhD</div>
+      <div>Based in Nantes · Working with international collaborations</div>
     </div>
   </div>
+  <script>
+    (() => {
+      const revealables = document.querySelectorAll("[data-reveal]");
+      if (!("IntersectionObserver" in window) || revealables.length === 0) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      revealables.forEach((el) => observer.observe(el));
+    })();
+  </script>
 </body>
 </html>
