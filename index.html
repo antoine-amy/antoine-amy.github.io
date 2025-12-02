@@ -56,6 +56,7 @@
       margin: 0;
       padding: clamp(12px, 2.5vw, 24px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 72px);
       position: relative;
+      min-height: 100vh;
     }
 
     .page::before,
@@ -200,6 +201,18 @@
       justify-self: center;
     }
 
+    .portrait-button {
+      border: 1px solid transparent;
+      padding: 0;
+      margin: 0;
+      background: none;
+      width: 100%;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      cursor: pointer;
+    }
+
     .portrait {
       width: 100%;
       max-width: clamp(180px, 20vw, 240px);
@@ -209,6 +222,41 @@
       box-shadow: var(--shadow-strong);
       border: 1px solid var(--stroke);
       background: linear-gradient(135deg, rgba(11, 167, 201, 0.06), #ffffff);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .hobby-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      background: rgba(11, 167, 201, 0.18);
+      border: 1px solid rgba(11, 167, 201, 0.5);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 18px rgba(14, 26, 43, 0.18);
+      z-index: 2;
+    }
+
+    .hobby-tag img {
+      width: 10px;
+      height: 10px;
+      max-width: 10px;
+      max-height: 10px;
+      object-fit: contain;
+    }
+
+    .portrait-button:hover .portrait {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 44px rgba(14, 26, 43, 0.16);
     }
 
     .portrait img {
@@ -218,6 +266,10 @@
       display: block;
       filter: saturate(1.08);
       transform: scale(1.02);
+    }
+
+    .hint {
+      display: none;
     }
 
     .eyebrow {
@@ -357,6 +409,14 @@
       max-width: none;
     }
 
+    .info-grid .detail {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
     .card::after {
       content: "";
       position: absolute;
@@ -400,10 +460,83 @@
       overflow: hidden;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       animation: rise 0.8s ease 0.15s both;
-      text-align: center;
+      text-align: left;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(6px);
     }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 17, 35, 0.55);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 20;
+    }
+
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 20px 24px;
+      max-width: 520px;
+      width: min(520px, 96vw);
+      box-shadow: 0 24px 60px rgba(14, 26, 43, 0.18);
+      color: var(--text);
+      position: relative;
+    }
+
+    .modal-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .modal-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      background: rgba(11, 167, 201, 0.08);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid var(--stroke);
+      background: #f7fbff;
+      border-radius: 10px;
+      padding: 6px 10px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 700;
+    }
+
 
     .panel .tag {
       display: inline-flex;
@@ -492,6 +625,7 @@
     }
 
     .work-card {
+      display: block;
       background: linear-gradient(180deg, #ffffff, #f5f8fd);
       border: 1px solid var(--stroke);
       border-radius: 20px;
@@ -501,6 +635,8 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       animation: rise 0.8s ease 0.1s both;
       text-align: left;
+      color: inherit;
+      text-decoration: none;
     }
 
     .work-thumb {
@@ -557,22 +693,6 @@
       border: 1px solid var(--stroke);
       border-radius: 12px;
       padding: 6px 10px;
-    }
-
-    .footer {
-      margin-top: 60px;
-      padding: 18px 0 0;
-      border-top: 1px solid var(--stroke);
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 14px;
-      background: linear-gradient(180deg, #ffffff, #f2f6fb);
-      border-radius: 16px 16px 0 0;
-      padding: 18px 16px;
     }
 
     ul {
@@ -704,23 +824,27 @@
         <div class="cta">
           <a class="button" href="mailto:antoine.amy72@gmail.com">Email me</a>
           <a class="button ghost" href="CV_postdoc_antoine.pdf" download>Download CV</a>
+          <a class="button ghost" href="https://www.linkedin.com/in/antoine-amy-91b6b6139/?locale=en" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="portrait">
-          <img src="profile.jpeg" alt="Portrait of Antoine Amy" loading="lazy">
-        </div>
+        <button class="portrait-button" type="button" id="open-hobbies">
+          <div class="portrait">
+            <span class="hobby-tag">
+              <img src="ferris-wheel-svgrepo-com.svg" alt="" aria-hidden="true" width="10" height="10">
+              Hobbies
+            </span>
+            <img src="profile.jpeg" alt="Portrait of Antoine Amy" loading="lazy">
+          </div>
+        </button>
       </div>
     </section>
 
     <div class="info-grid" data-reveal>
       <div class="card">
         <small>Affiliations</small>
-        <strong>SUBATECH · UMass Amherst</strong>
-      </div>
-      <div class="card">
-        <small>Experiments</small>
-        <strong>nEXO · Virgo · XENON/DARWIN · KM3NeT</strong>
+        <strong>nEXO collaboration</strong>
+        <span class="detail">SUBATECH (Nantes, France) · UMass Amherst (MA, USA)</span>
       </div>
       <div class="card">
         <small>Focus areas</small>
@@ -732,13 +856,12 @@
       </div>
     </div>
 
-    <section id="research" class="work" data-reveal>
+    <section id="research" class="work">
       <div class="section-title">
         <h2>Research Highlights</h2>
-        <div class="pill">nEXO collaboration</div>
       </div>
       <div class="grid">
-        <div class="work-card" data-reveal data-delay="1">
+        <div class="work-card">
           <div class="tag">Impurities & purification</div>
           <img class="work-thumb" src="electronegative_impurties_models.png" alt="Modeling electronegative impurities" loading="lazy">
           <h3>Modeling ultra-trace electronegative impurities</h3>
@@ -749,7 +872,7 @@
             <span>Data analysis</span>
           </div>
         </div>
-        <div class="work-card" data-reveal data-delay="2">
+        <div class="work-card">
           <div class="tag">Backgrounds</div>
           <img class="work-thumb" src="nEXO_bkgd_vs_shielding.png" alt="Simulated background versus shielding" loading="lazy">
           <h3>Shielding and radioactive background pipelines</h3>
@@ -760,7 +883,7 @@
             <span>Statistics</span>
           </div>
         </div>
-        <div class="work-card" data-reveal data-delay="3">
+        <div class="work-card">
           <div class="tag">Cryogenics</div>
           <img class="work-thumb" src="HFE_setup.jpeg" alt="HFE cryogenic recirculation setup" loading="lazy">
           <h3>Designing cryogenic recirculation systems</h3>
@@ -771,7 +894,7 @@
             <span>Mentorship</span>
           </div>
         </div>
-        <div class="work-card" data-reveal data-delay="4">
+        <div class="work-card">
           <div class="tag">Optics</div>
           <img class="work-thumb" src="croissant.jpeg" alt="Optical bench tools and notes" loading="lazy">
           <h3>Advanced Virgo mode-cleaner R&amp;D</h3>
@@ -782,7 +905,7 @@
             <span>Simulation</span>
           </div>
         </div>
-        <div class="work-card" data-reveal data-delay="1">
+        <div class="work-card">
           <div class="tag">Photosensors</div>
           <h3>XENON/DARWIN ABALONE characterization</h3>
           <p>Characterized hybrid photosensors, built Geant4 optical models, and measured DAQ noise to evaluate detector performance.</p>
@@ -792,7 +915,7 @@
             <span>DAQ</span>
           </div>
         </div>
-        <div class="work-card" data-reveal data-delay="2">
+        <div class="work-card">
           <div class="tag">Analysis</div>
           <img class="work-thumb" src="profile.jpeg" alt="Antoine working on analysis" loading="lazy">
           <h3>Neutrino & dark matter sensitivity studies</h3>
@@ -803,39 +926,36 @@
             <span>nEXO</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="skills" class="grid" data-reveal>
-      <div class="panel" data-reveal data-delay="1">
-        <div class="tag">Modeling</div>
-        <h3>Impurity & background control</h3>
-        <p>Purification/outgassing models, gamma attenuation, shielding design, and mitigation playbooks for low-background detectors.</p>
-      </div>
-      <div class="panel" data-reveal data-delay="2">
-        <div class="tag">Simulation & data</div>
-        <h3>Monte Carlo + analysis</h3>
-        <p>Geant4/ROOT, MCNP, Python (NumPy, SciPy, pandas, Matplotlib, strax) with automated pipelines on SLURM/HPC clusters.</p>
-      </div>
-      <div class="panel" data-reveal data-delay="3">
-        <div class="tag">Instrumentation</div>
-        <h3>Cryo systems & controls</h3>
-        <p>DAQ and slow controls, sensor integration (thermocouples, pressure, flow), Arduino-based readout, PCB design, and DIN-rail power/relays/valves.</p>
-      </div>
-      <div class="panel" data-reveal data-delay="4">
-        <div class="tag">Coding</div>
-        <h3>Software toolkit</h3>
-        <p>C++, Python, Bash; reproducible data pipelines; Linux/macOS/Windows; LATEX/Markdown documentation.</p>
-      </div>
-      <div class="panel" data-reveal data-delay="5">
-        <div class="tag">Electronics</div>
-        <h3>PCB & embedded builds</h3>
-        <p>Arduino-based readouts, PCB design, relay/valve control, sensor integration, and power systems for lab instrumentation.</p>
-      </div>
-      <div class="panel" data-reveal data-delay="6">
-        <div class="tag">Communication</div>
-        <h3>Teaching & outreach</h3>
-        <p>Lectures, labs, and public talks; fluent in French/English; clear documentation to align collaborators and students.</p>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Modeling</div>
+          <h3>Impurity & background control</h3>
+          <p>Purification/outgassing models, gamma attenuation, shielding design, and mitigation playbooks for low-background detectors.</p>
+        </a>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Simulation & data</div>
+          <h3>Monte Carlo + analysis</h3>
+          <p>Geant4/ROOT, MCNP, Python (NumPy, SciPy, pandas, Matplotlib, strax) with automated pipelines on SLURM/HPC clusters.</p>
+        </a>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Instrumentation</div>
+          <h3>Cryo systems & controls</h3>
+          <p>DAQ and slow controls, sensor integration (thermocouples, pressure, flow), Arduino-based readout, PCB design, and DIN-rail power/relays/valves.</p>
+        </a>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Coding</div>
+          <h3>Software toolkit</h3>
+          <p>C++, Python, Bash; reproducible data pipelines; Linux/macOS/Windows; LATEX/Markdown documentation.</p>
+        </a>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Electronics</div>
+          <h3>PCB & embedded builds</h3>
+          <p>Arduino-based readouts, PCB design, relay/valve control, sensor integration, and power systems for lab instrumentation.</p>
+        </a>
+        <a class="work-card" href="mailto:antoine.amy72@gmail.com">
+          <div class="tag">Communication</div>
+          <h3>Teaching & outreach</h3>
+          <p>Lectures, labs, and public talks; fluent in French/English; clear documentation to align collaborators and students.</p>
+        </a>
       </div>
     </section>
 
@@ -862,34 +982,63 @@
       </ul>
     </section>
 
-    <section id="contact" class="panel" style="margin-top: 20px;" data-reveal>
-      <div class="tag">Contact</div>
-      <h3>Let us collaborate on your next detector challenge</h3>
-      <p>Email works best. Include scope, timelines, and the physics question you want to answer.</p>
-      <div class="cta" style="margin-top: 14px;">
-        <a class="button" href="mailto:antoine.amy72@gmail.com">Send an email</a>
-        <a class="button ghost" href="https://www.linkedin.com/in/antoine-amy" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </section>
-
-    <div class="footer">
-      <div>Antoine Amy — Subatomic Physics PhD</div>
-      <div>Based in Nantes · Working with international collaborations</div>
+  </div>
+  <div class="modal" id="hobby-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="hobby-title">
+      <button class="close-modal" type="button" id="close-hobbies">Close</button>
+      <h3 id="hobby-title">Outside the lab</h3>
+      <p>What I’m into when I’m not building detectors:</p>
+      <ul class="pill-list">
+        <li>Basketball</li>
+        <li>Volleyball</li>
+        <li>UI/UX design</li>
+        <li>Branding</li>
+        <li>New tech</li>
+        <li>Electronics</li>
+        <li>3D printing</li>
+        <li>Traveling</li>
+      </ul>
     </div>
   </div>
   <script>
     (() => {
       const revealables = document.querySelectorAll("[data-reveal]");
-      if (!("IntersectionObserver" in window) || revealables.length === 0) return;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-      revealables.forEach((el) => observer.observe(el));
+      if ("IntersectionObserver" in window && revealables.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        revealables.forEach((el) => observer.observe(el));
+      }
+    })();
+
+    (() => {
+      const modal = document.getElementById("hobby-modal");
+      const openBtn = document.getElementById("open-hobbies");
+      const closeBtn = document.getElementById("close-hobbies");
+      if (!modal || !openBtn || !closeBtn) return;
+
+      const open = () => {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+      };
+      const close = () => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+      };
+
+      openBtn.addEventListener("click", open);
+      closeBtn.addEventListener("click", close);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) close();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") close();
+      });
     })();
   </script>
 </body>
